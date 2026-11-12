@@ -379,7 +379,7 @@ footer .links a{margin-right:16px}
         <div class="row">
           <dt><span class="tag">Compte</span><h3>La session</h3></dt>
           <dd>
-            <p>Le mot de passe du compte local est haché avec sel (fonction <code>generate_password_hash</code> de Werkzeug) et jamais conservé en clair. Le cookie de session est <code>HttpOnly</code>, <code>SameSite=Lax</code>, valable 30 jours. Toute écriture exige un jeton CSRF, comparé en temps constant. Les réponses portent <code>X-Content-Type-Options: nosniff</code>, <code>X-Frame-Options: DENY</code>, <code>Referrer-Policy: no-referrer</code>, <code>Cross-Origin-Opener-Policy: same-origin</code> ; l’API n’est jamais mise en cache. Le micro n’est autorisé que pour la dictée ; la caméra et la localisation sont refusées.</p>
+            <p>Le mot de passe du compte local est haché avec sel (fonction <code>generate_password_hash</code> de Werkzeug) et jamais conservé en clair. Le cookie de session est <code>HttpOnly</code>, <code>SameSite=Lax</code>, valable 30 jours. La clé qui signe ce cookie n’est plus écrite en clair dans un fichier : elle est dérivée (HMAC-SHA-256) de la clé de la base, elle-même protégée par DPAPI. Toute écriture exige un jeton CSRF, comparé en temps constant. Les pages HTML de l’application portent une politique de sécurité de contenu (<code>Content-Security-Policy</code>) qui n’autorise que l’application elle-même et <code>geo.api.gouv.fr</code> pour les chargements, et interdit l’intégration dans le cadre d’un autre site ; les scripts de l’interface restant intégrés aux pages, elle limite surtout les chargements externes. Les réponses portent <code>X-Content-Type-Options: nosniff</code>, <code>X-Frame-Options: DENY</code>, <code>Referrer-Policy: no-referrer</code>, <code>Cross-Origin-Opener-Policy: same-origin</code> ; l’API n’est jamais mise en cache. Le micro n’est autorisé que pour la dictée ; la caméra et la localisation sont refusées.</p>
           </dd>
         </div>
         <div class="row">
@@ -399,14 +399,13 @@ footer .links a{margin-right:16px}
         <div class="row">
           <dt><span class="tag">Internet</span><h3>Les connexions sortantes</h3></dt>
           <dd>
-            <p>Quatre situations, toutes déclenchées par votre saisie ou votre clic :</p>
+            <p>Trois situations, toutes déclenchées par votre saisie ou votre clic :</p>
             <ul>
               <li>vous saisissez un code postal à cinq chiffres dans une fiche : la commune est cherchée sur l’API publique <code>geo.api.gouv.fr</code>, qui reçoit ce code postal (et, comme tout site, l’adresse IP de votre connexion) ;</li>
-              <li>vous ouvrez le guide intégré : deux polices (Inter et Nunito) sont demandées à Google Fonts ;</li>
               <li>vous activez la dictée vocale : le modèle de reconnaissance (environ 41 Mo) est téléchargé une fois depuis <code>alphacephei.com</code> ; la transcription se fait ensuite sur l’ordinateur ;</li>
               <li>vous cliquez sur un lien vers un site officiel (service-public.fr, Légifrance…) : il s’ouvre dans votre navigateur.</li>
             </ul>
-            <p>Pas de statistiques d’usage, pas de rapport d’erreurs envoyé à l’éditeur, pas de compte en ligne.</p>
+            <p>Les pages de l’application, guide intégré compris, n’appellent aucune police ni aucun script hébergé ailleurs. Pas de statistiques d’usage, pas de rapport d’erreurs envoyé à l’éditeur, pas de compte en ligne.</p>
           </dd>
         </div>
       </dl>
@@ -420,7 +419,7 @@ footer .links a{margin-right:16px}
           <span class="eyebrow">Avant de consulter une IA</span>
           <h3>Vos noms restent ici, même quand vous demandez de l’aide.</h3>
           <p>Dans l’assistant « J’ai un problème », Providentia prépare la demande à copier dans l’IA de votre choix. Les noms, adresses, courriels, téléphones, IBAN, numéros de sécurité sociale et références qu’elle reconnaît sont remplacés par des balises comme «PERSONNE_1».</p>
-          <p>La table de correspondance reste sur votre ordinateur : à la réponse de l’IA, vos vraies données reviennent, ici seulement. Aucune fonction de Providentia n’envoie vos données à une IA : c’est vous qui copiez la demande, après avoir relu l’aperçu.</p>
+          <p>La table de correspondance reste sur votre ordinateur : à la réponse de l’IA, vos vraies données reviennent, ici seulement. Aucune fonction de Providentia n’envoie vos données à une IA : le code d’envoi direct qui subsistait dans une ancienne version a été retiré, et c’est vous qui copiez la demande, après avoir relu l’aperçu.</p>
           <p class="note" style="margin-top:6px">Captures avec des données fictives.</p>
         </div>
       </div>
