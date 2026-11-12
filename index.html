@@ -40,6 +40,7 @@ p{margin:0}
 .btn:hover{transform:translateY(-1px)}
 .btn.alt{background:transparent;color:var(--green);border-color:var(--line);box-shadow:none}
 .btn.alt:hover{border-color:var(--green)}
+.btn.soon{cursor:default;pointer-events:none;opacity:.8}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px}
 .pill{display:inline-flex;align-items:center;gap:8px;background:var(--gold-s);color:var(--gold);padding:7px 14px;border-radius:999px;font:600 13.5px/1 Inter,sans-serif}
 .pill i{width:8px;height:8px;border-radius:50%;background:var(--gold)}
@@ -354,7 +355,7 @@ footer .links a{margin-right:16px}
         <div class="card">
           <span class="eyebrow">Étape 1 · sur votre ordinateur</span>
           <h3>🖥️ Windows</h3>
-          <a class="btn" href="https://github.com/mailtomehome-stack/providentia/releases/latest/download/Providentia-Setup.exe">Télécharger l’installateur</a>
+          <span class="btn alt soon" role="button" aria-disabled="true">Bientôt disponible</span>
           <p class="ver">Version 143.5 · 44 Mo</p>
           <ol class="steps">
             <li><span><strong>Téléchargez</strong> puis ouvrez le fichier d’installation.</span></li>
@@ -367,7 +368,7 @@ footer .links a{margin-right:16px}
         <div class="card">
           <span class="eyebrow">Étape 2 · sur votre téléphone</span>
           <h3>📱 Android</h3>
-          <a class="btn" href="https://github.com/mailtomehome-stack/providentia/releases/latest/download/Providentia-mobile.apk">Télécharger l’application</a>
+          <span class="btn alt soon" role="button" aria-disabled="true">Bientôt disponible</span>
           <p class="ver">Version 1.5.16</p>
           <p class="note" style="margin:0"><strong>À faire après l’étape 1.</strong> La copie Android se relie à Providentia installée sur votre ordinateur : sans elle, l’application mobile ne s’ouvre pas.</p>
           <ol class="steps">
