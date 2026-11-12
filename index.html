@@ -9,7 +9,7 @@
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="img/providentia-emblem.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#faf6ec;--bg2:#f4ecd9;--card:#fffdf7;--ink:#26231b;--mute:#645e4f;--line:#e6dcc1;
@@ -70,6 +70,51 @@ section.blk{padding:64px 0}
 .hero{padding:56px 0 28px}
 .hero-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr);gap:44px;align-items:center}
 .hero h1{margin:18px 0 18px}
+/* accueil : ouverture à plat, échelle réelle (aucune perspective, aucun élément inventé) */
+.hero2{position:relative;overflow:hidden;padding:52px 0 0;isolation:isolate}
+.hero2::before{content:"";position:absolute;inset:0 0 auto 0;height:760px;z-index:-1;
+  background:radial-gradient(640px 380px at 12% 8%,color-mix(in srgb,var(--green-s) 90%,transparent),transparent 70%),radial-gradient(560px 360px at 92% 4%,color-mix(in srgb,var(--gold-s) 85%,transparent),transparent 72%)}
+.h2-copy{text-align:center;max-width:920px;margin:0 auto;padding-inline:20px;display:flex;flex-direction:column;align-items:center}
+.hero2 h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(40px,6.2vw,76px);line-height:1.04;letter-spacing:-.028em;font-optical-sizing:auto;margin:22px 0 20px;color:var(--ink);text-wrap:balance}
+.hero2 h1 .ln{display:block}
+.hero2 h1 em{font-style:italic;font-weight:500;letter-spacing:-.02em;position:relative;white-space:nowrap;padding:0 .06em .04em;
+  background:linear-gradient(96deg,var(--green-d) 0%,#2f8a63 52%,#4a7fb3 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-theme="dark"] .hero2 h1 em{background:linear-gradient(96deg,#a6d6b6 0%,#7fc9a3 52%,#8cb8e6 100%);-webkit-background-clip:text;background-clip:text}
+.hero2 h1 em svg{position:absolute;left:-1%;width:102%;bottom:-.19em;height:.3em;overflow:visible;pointer-events:none}
+.hero2 h1 em svg path{fill:none;stroke-linecap:round}
+.hero2 h1 em .sw1{stroke:var(--gold);stroke-width:5;opacity:.95}
+.hero2 h1 em .sw2{stroke:var(--gold);stroke-width:2.2;opacity:.55}
+.hero2 .lead{max-width:37em;margin:0 auto;font-size:clamp(17px,1.55vw,20.5px);line-height:1.6;color:var(--mute)}
+.hero2 .cta{justify-content:center;margin:30px 0 18px}
+.hero2 .cta .btn{min-height:56px;padding:0 30px;font-size:17px}
+.hero2 .cta .btn:not(.alt){box-shadow:0 14px 28px -14px color-mix(in srgb,var(--green) 85%,transparent)}
+.hero2 .ticks{justify-content:center}
+.hstage{position:relative;width:min(1120px,100% - 40px);margin:46px auto 0;padding:clamp(14px,3vw,34px) clamp(14px,3vw,34px) 0;border-radius:28px 28px 0 0;display:grid;grid-template-columns:minmax(0,1fr) clamp(96px,13.5%,148px);gap:clamp(14px,2.2vw,26px);align-items:end;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--green-s) 78%,var(--bg)) 0%,color-mix(in srgb,var(--blue-s) 70%,var(--bg)) 100%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--line) 85%,transparent)}
+.hstage .win2{margin:0;min-width:0;border-radius:14px 14px 0 0;overflow:hidden;background:var(--card);
+  box-shadow:0 30px 60px -30px rgba(30,45,38,.45),0 0 0 1px color-mix(in srgb,var(--line) 90%,transparent)}
+.win2 .bar2{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--line);font:600 12.5px/1 Inter,sans-serif;color:var(--mute)}
+.win2 .bar2 i{width:10px;height:10px;border-radius:50%;background:color-mix(in srgb,var(--mute) 35%,var(--bg2))}
+.win2 .bar2 span{margin-left:6px;letter-spacing:.01em}
+.win2 img{width:100%;aspect-ratio:2400/1500;display:block}
+.hstage .ph2{margin:0;padding:5px 5px 0;border-radius:24px 24px 0 0;background:#16211b;
+  box-shadow:0 30px 44px -22px rgba(10,22,16,.7),0 0 0 1px rgba(255,255,255,.07) inset}
+.ph2 img{width:100%;aspect-ratio:780/1560;object-fit:cover;object-position:top;border-radius:19px 19px 0 0;display:block}
+.hstage-cap{width:min(1120px,100% - 40px);margin:12px auto 0;text-align:center;font-size:13.5px;color:var(--mute)}
+@media (prefers-reduced-motion:no-preference){
+  .rise{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .hero2 h1 em .sw1,.hero2 h1 em .sw2{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s cubic-bezier(.4,.1,.2,1) .7s forwards}
+  .hero2 h1 em .sw2{animation-delay:.95s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+}
+@media (max-width:860px){
+  .hero2{padding-top:36px}.hstage{margin-top:34px;border-radius:22px 22px 0 0}
+  .hstage{grid-template-columns:minmax(0,1fr)}.hstage .ph2{display:none}
+  .win2 .bar2 span{display:none}
+}
+
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 22px}
 .ticks{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--mute);font-size:15px}
 .ticks li::before{content:"✓ ";color:var(--green);font-weight:700}
@@ -212,19 +257,20 @@ footer .links a{margin-right:16px}
 
 <!-- ═════════ ACCUEIL ═════════ -->
 <div class="view" id="v-accueil" data-title="Providentia — le secrétaire personnel de votre foyer">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="pill"><i></i>Version de test · accès sur invitation</span>
-        <h1>Le secrétaire personnel de votre foyer.</h1>
-        <p class="lead">Contrats, salaires, aides, dépenses, courriers, CV : toute la paperasse d’une maison, rangée au même endroit, chez vous. Et un moment pour souffler quand il le faut.</p>
-        <div class="cta">
-          <a class="btn" href="#telecharger">Télécharger pour Windows</a>
-          <a class="btn alt" href="#ressources">Voir comment ça se présente</a>
-        </div>
-        <ul class="ticks"><li>Gratuit</li><li>Données sur votre ordinateur</li><li>Copie Android en lecture</li></ul>
+  <section class="hero2">
+    <div class="h2-copy">
+      <span class="pill rise"><i></i>Version de test · accès sur invitation</span>
+      <h1 class="rise" style="--d:.08s"><span class="ln">Le secrétaire personnel</span><span class="ln">de votre <em>foyer<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path class="sw1" pathLength="1" d="M3 13 C 40 5, 92 4, 140 7 S 188 10, 197 5"/><path class="sw2" pathLength="1" d="M20 17.5 C 70 12, 120 13, 176 15.5"/></svg></em>.</span></h1>
+      <p class="lead rise" style="--d:.16s">Contrats, salaires, aides, dépenses, courriers, CV : toute la paperasse d’une maison, rangée au même endroit, chez vous. Et un moment pour souffler quand il le faut.</p>
+      <div class="cta rise" style="--d:.24s">
+        <a class="btn" href="#telecharger">Télécharger pour Windows</a>
+        <a class="btn alt" href="#ressources">Voir comment ça se présente</a>
       </div>
-      <figure class="win" style="margin:0"><div class="chrome"><i></i><i></i><i></i></div><img src="img/dep_accueil.jpg?v=4" width="2400" height="1500" alt="Écran d’accueil de Providentia, espace Dépenses : « Bonjour, que voulez-vous faire ? », le geste du moment et cinq grandes tuiles"></figure>
+      <ul class="ticks rise" style="--d:.3s"><li>Gratuit</li><li>Données sur votre ordinateur</li><li>Copie Android en lecture</li></ul>
+    </div>
+    <div class="hstage rise" style="--d:.36s">
+      <figure class="win2"><div class="bar2" aria-hidden="true"><i></i><i></i><i></i><span>Providentia</span></div><img src="img/dep_accueil.jpg?v=4" width="2400" height="1500" decoding="async" fetchpriority="high" alt="Écran d’accueil de Providentia, espace Dépenses : « Bonjour, que voulez-vous faire ? », le geste du moment et cinq grandes tuiles"></figure>
+      <figure class="ph2"><img src="img/mob_dep.jpg?v=4" width="780" height="1560" decoding="async" alt="Accueil de l’application Android, en lecture seule"></figure>
     </div>
   </section>
 
