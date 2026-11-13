@@ -165,6 +165,17 @@ section.blk{padding:64px 0}
 .show figcaption{margin-top:14px;color:var(--mute);font-size:16px;max-width:46em}
 .show figcaption b{color:var(--ink)}
 .show .win img{aspect-ratio:1600/1000;object-fit:cover;object-position:top left;background:var(--bg2)}
+.show .wbox{padding:clamp(12px,2.4vw,26px);border-radius:clamp(20px,2.4vw,28px);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--green) 26%,transparent),0 30px 56px -40px rgba(30,52,40,.5);
+  background:radial-gradient(70% 55% at 16% 0%,rgba(255,255,255,.32),transparent 70%),linear-gradient(135deg,color-mix(in srgb,var(--green) 34%,var(--bg)) 0%,color-mix(in srgb,var(--green) 22%,color-mix(in srgb,var(--blue) 16%,var(--bg))) 55%,color-mix(in srgb,var(--blue) 26%,var(--bg)) 100%)}
+.show.dep .wbox{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--blue) 30%,transparent),0 30px 56px -40px rgba(24,44,76,.5);
+  background:radial-gradient(70% 55% at 16% 0%,rgba(255,255,255,.34),transparent 70%),linear-gradient(135deg,color-mix(in srgb,var(--blue) 34%,var(--bg)) 0%,color-mix(in srgb,var(--blue) 24%,color-mix(in srgb,var(--green) 10%,var(--bg))) 55%,color-mix(in srgb,var(--green) 22%,var(--bg)) 100%)}
+:root[data-theme="dark"] .show .wbox{background:radial-gradient(70% 55% at 16% 0%,rgba(255,255,255,.07),transparent 70%),linear-gradient(135deg,color-mix(in srgb,var(--green) 22%,var(--bg)) 0%,color-mix(in srgb,var(--blue) 18%,var(--bg)) 100%)}
+:root[data-theme="dark"] .show.dep .wbox{background:radial-gradient(70% 55% at 16% 0%,rgba(255,255,255,.07),transparent 70%),linear-gradient(135deg,color-mix(in srgb,var(--blue) 24%,var(--bg)) 0%,color-mix(in srgb,var(--green) 14%,var(--bg)) 100%)}
+.show .win{border:0;border-radius:14px;box-shadow:0 0 0 1px rgba(26,52,40,.34),0 2px 6px rgba(26,46,34,.16),0 30px 54px -24px rgba(16,36,26,.6)}
+.show.dep .win{box-shadow:0 0 0 1px rgba(22,44,78,.38),0 2px 6px rgba(20,36,64,.16),0 30px 54px -24px rgba(14,28,52,.6)}
+.show .win .chrome{background:linear-gradient(#2c5546,#23463a);border-bottom:1px solid rgba(0,0,0,.25)}
+.show.dep .win .chrome{background:linear-gradient(#2d5a92,#224a7a)}
+.show .win .chrome i{background:rgba(255,255,255,.34)}
 
 /* téléphone */
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
@@ -333,7 +344,7 @@ footer .links a{margin-right:16px}
           <button role="tab" aria-selected="false" data-src="img/res_traiter.jpg?v=4" data-alt="À traiter : démarches classées de la plus pressée à la plus tranquille" data-cap="Une chose à la fois : les démarches sont classées de la plus pressée à la plus tranquille, avec un bouton pour les démarrer."><b>À traiter</b><span>Une démarche à la fois</span></button>
           <button role="tab" aria-selected="false" data-src="img/res_foyer.jpg?v=4" data-alt="Foyer : logement, loyer, charges et membres" data-cap="Le logement (loyer, charges, total) et les personnes qui composent le foyer, réunis au même endroit."><b>Foyer</b><span>Logement et membres</span></button>
         </div>
-        <figure class="stage" style="margin:0"><div class="win"><div class="chrome"><i></i><i></i><i></i></div><img data-stage src="img/res_accueil.jpg?v=4" width="2400" height="1500" alt="Accueil de l’espace Ressources : le geste du moment et cinq tuiles pour agir"></div><figcaption data-cap-out>Chaque matin, un geste à la fois : le plus utile du moment, puis cinq tuiles pour ajouter un contrat, un salaire, une aide, rédiger un courrier ou vérifier ses droits.</figcaption></figure>
+        <figure class="stage" style="margin:0"><div class="wbox"><div class="win"><div class="chrome"><i></i><i></i><i></i></div><img data-stage src="img/res_accueil.jpg?v=4" width="2400" height="1500" alt="Accueil de l’espace Ressources : le geste du moment et cinq tuiles pour agir"></div></div><figcaption data-cap-out>Chaque matin, un geste à la fois : le plus utile du moment, puis cinq tuiles pour ajouter un contrat, un salaire, une aide, rédiger un courrier ou vérifier ses droits.</figcaption></figure>
       </div>
     </div>
   </section>
@@ -361,7 +372,7 @@ footer .links a{margin-right:16px}
           <button role="tab" aria-selected="false" data-src="img/dep_dossiers.jpg?v=4" data-alt="Dossiers : un litige suivi étape par étape" data-cap="Un litige, une facture contestée : chaque dossier avance étape par étape, jusqu’au courrier de réclamation que vous relisez avant l’envoi."><b>Dossiers</b><span>Réclamations, étape par étape</span></button>
           <button role="tab" aria-selected="false" data-src="img/dep_projets.jpg?v=4" data-alt="Projets : budget, étapes et dates" data-cap="Un projet, une étape après l’autre : budget, étapes à franchir, dépenses réalisées et échéances à surveiller."><b>Projets</b><span>Un objectif, des étapes</span></button>
         </div>
-        <figure class="stage" style="margin:0"><div class="win"><div class="chrome"><i></i><i></i><i></i></div><img data-stage src="img/dep_accueil.jpg?v=5" width="2400" height="1500" alt="Accueil des Dépenses : le geste du moment et cinq grandes tuiles"></div><figcaption data-cap-out>Le portail d’accueil propose le geste du moment (ici, régler un prêt), puis cinq grandes entrées : engagement, dépense, échéances, problème, reste à vivre.</figcaption></figure>
+        <figure class="stage" style="margin:0"><div class="wbox"><div class="win"><div class="chrome"><i></i><i></i><i></i></div><img data-stage src="img/dep_accueil.jpg?v=5" width="2400" height="1500" alt="Accueil des Dépenses : le geste du moment et cinq grandes tuiles"></div></div><figcaption data-cap-out>Le portail d’accueil propose le geste du moment (ici, régler un prêt), puis cinq grandes entrées : engagement, dépense, échéances, problème, reste à vivre.</figcaption></figure>
       </div>
     </div>
   </section>
