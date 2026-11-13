@@ -73,7 +73,7 @@ section.blk{padding:64px 0}
 .hero-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr);gap:44px;align-items:center}
 .hero h1{margin:18px 0 18px}
 /* accueil : ouverture à plat, échelle réelle (aucune perspective, aucun élément inventé) */
-.hero2{position:relative;overflow:hidden;padding:52px 0 0;isolation:isolate}
+.hero2{position:relative;overflow:hidden;padding:52px 0 56px;isolation:isolate}
 .hero2::before{content:"";position:absolute;inset:0 0 auto 0;height:760px;z-index:-1;
   background:radial-gradient(640px 380px at 12% 8%,color-mix(in srgb,var(--green-s) 90%,transparent),transparent 70%),radial-gradient(560px 360px at 92% 4%,color-mix(in srgb,var(--gold-s) 85%,transparent),transparent 72%)}
 .h2-copy{text-align:center;max-width:920px;margin:0 auto;padding-inline:20px;display:flex;flex-direction:column;align-items:center}
@@ -88,19 +88,24 @@ section.blk{padding:64px 0}
 .hero2 .cta .btn{min-height:56px;padding:0 30px;font-size:17px}
 .hero2 .cta .btn:not(.alt){box-shadow:0 14px 28px -14px color-mix(in srgb,var(--green) 85%,transparent)}
 .hero2 .ticks{justify-content:center}
-.hstage{position:relative;width:min(1120px,100% - 40px);margin:46px auto 0;padding:clamp(14px,3vw,34px) clamp(14px,3vw,34px) 0;border-radius:28px 28px 0 0;display:grid;grid-template-columns:minmax(0,1fr) clamp(96px,13.5%,148px);gap:clamp(14px,2.2vw,26px);align-items:end;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--green-s) 78%,var(--bg)) 0%,color-mix(in srgb,var(--blue-s) 70%,var(--bg)) 100%);
-  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--line) 85%,transparent)}
-.hstage .win2{margin:0;min-width:0;border-radius:14px 14px 0 0;overflow:hidden;background:var(--card);
-  box-shadow:0 30px 60px -30px rgba(30,45,38,.45),0 0 0 1px color-mix(in srgb,var(--line) 90%,transparent)}
-.win2 .bar2{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--line);font:600 12.5px/1 Inter,sans-serif;color:var(--mute)}
-.win2 .bar2 i{width:10px;height:10px;border-radius:50%;background:color-mix(in srgb,var(--mute) 35%,var(--bg2))}
-.win2 .bar2 span{margin-left:6px;letter-spacing:.01em}
+.hstage{--sp:clamp(16px,3.2vw,36px);position:relative;width:min(1120px,100% - 40px);margin:54px auto 0;padding:var(--sp) var(--sp) calc(var(--sp) + clamp(0px,3.6vw,40px));isolation:isolate}
+.hstage::before{content:"";position:absolute;z-index:-1;inset:0;border-radius:clamp(22px,2.8vw,32px);
+  background:radial-gradient(70% 55% at 18% 0%,rgba(255,255,255,.34),transparent 70%),linear-gradient(135deg,color-mix(in srgb,var(--green) 34%,var(--bg)) 0%,color-mix(in srgb,var(--green) 22%,color-mix(in srgb,var(--blue) 16%,var(--bg))) 52%,color-mix(in srgb,var(--blue) 28%,var(--bg)) 100%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--green) 26%,transparent),0 34px 60px -40px rgba(30,52,40,.55)}
+:root[data-theme="dark"] .hstage::before{background:radial-gradient(70% 55% at 18% 0%,rgba(255,255,255,.07),transparent 70%),linear-gradient(135deg,color-mix(in srgb,var(--green) 22%,var(--bg)) 0%,color-mix(in srgb,var(--blue) 18%,var(--bg)) 100%)}
+.hstage .win2{margin:0;width:calc(100% - clamp(100px,19.5%,214px));min-width:0;border-radius:14px;overflow:hidden;background:var(--card);
+  box-shadow:0 0 0 1px rgba(26,52,40,.34),0 2px 6px rgba(26,46,34,.16),0 36px 64px -26px rgba(16,36,26,.62)}
+.win2 .bar2{position:relative;display:flex;align-items:center;gap:7px;padding:11px 14px;background:linear-gradient(#2c5546,#23463a);border-bottom:1px solid rgba(0,0,0,.25);font:600 12.5px/1 Inter,sans-serif;color:#eaf3ec}
+.win2 .bar2 i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.34)}
+.win2 .bar2 span{position:absolute;left:0;right:0;text-align:center;letter-spacing:.01em;pointer-events:none}
 .win2 img{width:100%;aspect-ratio:2400/1500;display:block}
-.hstage .ph2{margin:0;padding:5px 5px 0;border-radius:24px 24px 0 0;background:#16211b;
-  box-shadow:0 30px 44px -22px rgba(10,22,16,.7),0 0 0 1px rgba(255,255,255,.07) inset}
-.ph2 img{width:100%;aspect-ratio:780/1560;object-fit:cover;object-position:top;border-radius:19px 19px 0 0;display:block}
-.hstage-cap{width:min(1120px,100% - 40px);margin:12px auto 0;text-align:center;font-size:13.5px;color:var(--mute)}
+.hstage .ph2{--pp:clamp(4px,.7vw,8px);position:absolute;right:var(--sp);bottom:var(--sp);margin:0;width:clamp(104px,19%,216px);padding:var(--pp);border-radius:clamp(22px,3.4vw,40px);
+  background:linear-gradient(150deg,#323c38,#121815 55%,#1d2622);
+  box-shadow:0 2px 4px rgba(0,0,0,.25),0 40px 70px -26px rgba(8,18,12,.65),0 0 0 1.5px rgba(255,255,255,.08) inset}
+.ph2::before{content:"";position:absolute;right:-3px;top:22%;width:3px;height:11%;border-radius:0 2px 2px 0;background:#1a2320}
+.ph2::after{content:"";position:absolute;top:calc(var(--pp) + 9px);left:50%;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:#0b0f0d;box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+.ph2 img{width:100%;aspect-ratio:720/1560;object-fit:cover;object-position:top;border-radius:clamp(17px,2.8vw,32px);display:block}
+.hstage-cap{width:min(1120px,100% - 40px);margin:6px auto 0;text-align:center;font-size:13.5px;color:var(--mute)}
 @media (prefers-reduced-motion:no-preference){
   .rise{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
   @keyframes rise{to{opacity:1;transform:none}}
@@ -108,8 +113,8 @@ section.blk{padding:64px 0}
   @keyframes draw{to{clip-path:inset(-20% 0 -20% 0)}}
 }
 @media (max-width:860px){
-  .hero2{padding-top:36px}.hstage{margin-top:34px;border-radius:22px 22px 0 0}
-  .hstage{grid-template-columns:minmax(0,1fr)}.hstage .ph2{display:none}
+  .hero2{padding-top:36px}.hstage{margin-top:34px;--sp:14px;padding-bottom:var(--sp)}
+  .hstage .win2{width:100%}.hstage .ph2{display:none}
   .win2 .bar2 span{display:none}
 }
 
@@ -267,9 +272,10 @@ footer .links a{margin-right:16px}
       <ul class="ticks rise" style="--d:.3s"><li>Gratuit</li><li>Données sur votre ordinateur</li><li>Copie Android en lecture</li></ul>
     </div>
     <div class="hstage rise" style="--d:.36s">
-      <figure class="win2"><div class="bar2" aria-hidden="true"><i></i><i></i><i></i><span>Providentia</span></div><img src="img/dep_accueil.jpg?v=5" width="2400" height="1500" decoding="async" fetchpriority="high" alt="Écran d’accueil de Providentia, espace Dépenses : « Bonjour, que voulez-vous faire ? », le geste du moment et cinq grandes tuiles"></figure>
-      <figure class="ph2"><img src="img/mob_dep.jpg?v=4" width="780" height="1560" decoding="async" alt="Accueil de l’application Android, en lecture seule"></figure>
+      <figure class="win2"><div class="bar2" aria-hidden="true"><i></i><i></i><i></i><span>Providentia</span></div><img src="img/hero_app.jpg?v=1" width="2400" height="1500" decoding="async" fetchpriority="high" alt="Écran d’accueil de Providentia, espace Ressources : « Bonjour, que voulez-vous faire ? », le geste du moment et cinq tuiles pour ajouter un contrat, un salaire, une aide, un courrier ou vérifier ses droits"></figure>
+      <figure class="ph2"><img src="img/hero_phone.jpg?v=1" width="720" height="1560" decoding="async" alt="Page Salaires de l’application Android : net total, net moyen et bulletins du mois, en lecture seule"></figure>
     </div>
+    <p class="hstage-cap rise" style="--d:.44s">Windows pour tout gérer, Android pour consulter. Captures avec des données fictives.</p>
   </section>
 
   <section class="blk">
