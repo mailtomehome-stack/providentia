@@ -219,7 +219,7 @@ section.blk{padding:64px 0}
 .duo2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:34px}
 .duo2 h3{font:600 26px/1.2 Fraunces,serif;margin:8px 0 14px;text-wrap:balance}
 .plain{margin:0;padding-left:20px;display:grid;gap:11px;color:var(--mute);font-size:16px}.plain b{color:var(--ink)}
-.alt{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--blue-s);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:4px}.alt-ic{font-size:22px;line-height:1.2}.alt b{font:600 16px/1.3 Fraunces,serif;color:var(--ink)}.alt p{margin:4px 0 0;color:var(--mute);font-size:15px;line-height:1.55}
+.altbox{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--blue-s);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:4px}.alt-ic{font-size:22px;line-height:1.2}.altbox b{font:600 16px/1.3 Fraunces,serif;color:var(--ink)}.altbox p{margin:4px 0 0;color:var(--mute);font-size:15px;line-height:1.55}
 .refs{padding-left:20px;margin-top:6px}
 @media(max-width:900px){.spec .row{grid-template-columns:1fr;padding:22px}.duo2{grid-template-columns:1fr;gap:28px}}
 
@@ -235,9 +235,9 @@ section.blk{padding:64px 0}
 .spec summary:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 .spec .st{display:grid;gap:3px;min-width:0}
 .spec .gist{color:var(--mute);font-size:15px;font-weight:400;line-height:1.45}
-.spec .limdot{font:600 11.5px/1 Inter,system-ui,sans-serif;letter-spacing:.04em;color:var(--gold);background:var(--gold-s);border-radius:999px;padding:5px 9px;white-space:nowrap}
-.spec .chev{width:9px;height:9px;border-right:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(45deg) translateY(-2px);transition:transform .2s;margin-right:4px}
-.spec details[open] .chev{transform:rotate(-135deg) translateY(-2px)}
+.spec .limdot{grid-column:3;font:600 11.5px/1 Inter,system-ui,sans-serif;letter-spacing:.04em;color:var(--gold);background:var(--gold-s);border-radius:999px;padding:5px 9px;white-space:nowrap}
+.spec .chev{grid-column:4;justify-self:end;width:9px;height:9px;border-right:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(45deg) translateY(-2px);transition:transform .2s;margin-right:4px}
+.spec details[open] .chev{transform:rotate(-135deg) translateY(2px)}
 .spec .body{display:grid;gap:14px;padding:4px 24px 24px 148px;max-width:none}
 .spec .body p{line-height:1.7;max-width:64ch}
 .spec .body .lim{max-width:64ch}
@@ -253,7 +253,7 @@ section.blk{padding:64px 0}
 .checks b{font:600 17px/1.3 Fraunces,serif;color:var(--ink)}.checks p{color:var(--mute);font-size:15.5px;line-height:1.6;margin:0}
 .checks code{display:block;font:500 13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;overflow-wrap:anywhere;color:var(--ink)}
 .checks p code{display:inline;padding:1px 6px;font-size:.88em;border-radius:6px}
-@media(max-width:900px){.lims,.checks{grid-template-columns:1fr}.spec summary{grid-template-columns:minmax(0,1fr) auto;padding:16px 18px}.spec summary .tag{grid-column:1/-1}.spec summary .limdot{grid-column:1;justify-self:start}.spec .body{padding:2px 18px 20px}}
+@media(max-width:900px){.lims,.checks{grid-template-columns:1fr}.spec summary{grid-template-columns:minmax(0,1fr) auto;padding:16px 18px}.spec summary .tag{grid-column:1/-1}.spec summary .limdot{grid-column:1;justify-self:start}.spec summary .chev{grid-column:2;grid-row:2}.spec .body{padding:2px 18px 20px}}
 
 
 .mask{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:34px;align-items:center}
@@ -384,7 +384,7 @@ footer .links a{margin-right:16px}
         <div class="pcard"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.6"/><path d="m6 6 3.5 3.5M18 6l-3.5 3.5M6 18l3.5-3.5M18 18l-3.5-3.5"/></svg></span><h3>« J’ai un problème »</h3><p>Un litige, une arnaque, un dépôt de garantie : vous racontez la situation avec vos mots, et Providentia en tire un plan par niveaux, de l’amiable jusqu’à la justice. Chaque réclamation garde ses échanges, ses délais et ses pièces.</p><p class="lim"><b>À savoir :</b> le fondement juridique cité est affiché « à vérifier ». Ni l’IA ni l’issue ne sont garanties.</p></div>
         <div class="pcard"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5.5c0 4.3 2.9 7.4 7 9 4.1-1.6 7-4.7 7-9V6z"/><path d="M9 12.2l2.2 2.2 3.8-4"/></svg></span><h3>Votre IA, sans vos noms</h3><p>Pour peaufiner un texte, vous le copiez vous-même dans l’IA de votre choix. Avant la copie, noms, IBAN, téléphones et courriels reconnus sont remplacés par des balises.</p><p class="lim"><b>À savoir :</b> Providentia ne transmet rien à une IA. <a href="#confiance">Voir comment</a></p></div>
       </div>
-      <div class="also"><span>Et aussi</span><em>Appel de ressources, mois par mois</em><em>Rappels de déclaration (CAF, France Travail)</em><em>Simulation d’emprunt indicative</em><em>Dictée vocale (ordinateur)</em></div>
+      <div class="also"><span>Et aussi</span><em>Appel de ressources, mois par mois</em><em>Rappels de déclaration (CAF, France Travail)</em><em>Simulation d’emprunt indicative</em><em>Dictée vocale (ordinateur)</em><em>Une pause pour souffler : respiration, sudoku, puzzle, sons doux, poème du jour</em></div>
     </div>
   </section>
 
@@ -419,6 +419,7 @@ footer .links a{margin-right:16px}
           <button role="tab" aria-selected="false" data-src="img/res_documents.jpg?v=7" data-alt="Documents : coffre-fort classé par type, personne et employeur" data-cap="Un coffre-fort de documents : bulletins, contrats, justificatifs, classés par type, par personne et par employeur."><b>Documents</b><span>Le coffre-fort du foyer</span></button>
           <button role="tab" aria-selected="false" data-src="img/res_traiter.jpg?v=7" data-alt="À traiter : démarches classées de la plus pressée à la plus tranquille" data-cap="Une chose à la fois : les démarches sont classées de la plus pressée à la plus tranquille, avec un bouton pour les démarrer."><b>À traiter</b><span>Une démarche à la fois</span></button>
           <button role="tab" aria-selected="false" data-src="img/res_foyer.jpg?v=7" data-alt="Foyer : logement, loyer, charges et membres" data-cap="Le logement (loyer, charges, total) et les personnes qui composent le foyer, réunis au même endroit."><b>Foyer</b><span>Logement et membres</span></button>
+          <button role="tab" aria-selected="false" data-src="img/res_pause.jpg?v=1" data-alt="Faire une pause : respiration guidée, sudoku, puzzle, sons doux et poème du jour" data-cap="Un moment pour souffler, sans quitter Providentia : un cercle qui guide la respiration, un sudoku, un puzzle à reconstituer, des sons doux et un poème du jour. Rien n’est envoyé : tout reste sur l’appareil et fonctionne sans Internet."><b>Faire une pause</b><span>Respirer, jouer, écouter</span></button>
         </div>
         <figure class="stage" style="margin:0"><div class="wbox"><div class="win"><div class="chrome"><i></i><i></i><i></i></div><img data-stage src="img/res_accueil.jpg?v=5" width="2400" height="1500" alt="Accueil de l’espace Ressources : le geste du moment et cinq tuiles pour agir"></div></div><figcaption data-cap-out>Chaque matin, un geste à la fois : le plus utile du moment, puis cinq tuiles pour ajouter un contrat, un salaire, une aide, rédiger un courrier ou vérifier ses droits.</figcaption></figure>
       </div>
@@ -579,7 +580,7 @@ footer .links a{margin-right:16px}
             <li><span><strong>Au premier lancement</strong>, Providentia affiche le code de votre ordinateur et prépare le message pour demander votre licence.</span></li>
             <li><span><strong>Collez la licence reçue</strong> ou choisissez son fichier : l’application s’ouvre.</span></li>
           </ol>
-          <div class="alt"><span class="alt-ic" aria-hidden="true">🌐</span><div><b>Deux façons d’ouvrir Providentia</b><p>Par défaut, dans sa propre fenêtre. Le raccourci <em>Providentia — navigateur</em> (menu Démarrer, et Bureau si vous le cochez à l’installation) l’ouvre dans votre navigateur habituel. C’est aussi ce qui se passe seul si votre Windows n’a pas le composant WebView2. Dans les deux cas, vos données restent sur l’ordinateur.</p></div></div>
+          <div class="altbox"><span class="alt-ic" aria-hidden="true">🌐</span><div><b>Deux façons d’ouvrir Providentia</b><p>Par défaut, dans sa propre fenêtre. Le raccourci <em>Providentia — navigateur</em> (menu Démarrer, et Bureau si vous le cochez à l’installation) l’ouvre dans votre navigateur habituel. C’est aussi ce qui se passe seul si votre Windows n’a pas le composant WebView2. Dans les deux cas, vos données restent sur l’ordinateur.</p></div></div>
           <p class="sum">Empreinte SHA-256 : 399830D6184F814D391C84194DD6E3435264523D37B386389F5A7980DFFA9E24</p>
         </div>
         <div class="card">
