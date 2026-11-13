@@ -222,6 +222,38 @@ section.blk{padding:64px 0}
 .refs{padding-left:20px;margin-top:6px}
 @media(max-width:900px){.spec .row{grid-template-columns:1fr;padding:22px}.duo2{grid-template-columns:1fr;gap:28px}}
 
+/* confiance : lecture allégée */
+.spec{gap:10px}
+.spec details.row{display:block;padding:0;border-radius:18px;transition:box-shadow .2s}
+.spec details.row[open]{box-shadow:var(--shadow)}
+.spec summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:104px minmax(0,1fr) auto auto;align-items:center;gap:6px 20px;padding:18px 24px;border-radius:18px}
+.spec summary::-webkit-details-marker{display:none}
+.spec summary::after,.spec details[open] summary::after{content:none}
+.spec summary{font-weight:400;justify-content:initial}
+.spec details.row p:not(.lim){padding:0}
+.spec summary:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.spec .st{display:grid;gap:3px;min-width:0}
+.spec .gist{color:var(--mute);font-size:15px;font-weight:400;line-height:1.45}
+.spec .limdot{font:600 11.5px/1 Inter,system-ui,sans-serif;letter-spacing:.04em;color:var(--gold);background:var(--gold-s);border-radius:999px;padding:5px 9px;white-space:nowrap}
+.spec .chev{width:9px;height:9px;border-right:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(45deg) translateY(-2px);transition:transform .2s;margin-right:4px}
+.spec details[open] .chev{transform:rotate(-135deg) translateY(-2px)}
+.spec .body{display:grid;gap:14px;padding:4px 24px 24px 148px;max-width:none}
+.spec .body p{line-height:1.7;max-width:64ch}
+.spec .body .lim{max-width:64ch}
+.lims-head{margin-bottom:20px}
+.lims-head h3{font:600 26px/1.2 Fraunces,serif;margin:8px 0 0;text-wrap:balance}
+.lims{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.lm{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:6px;align-content:start}
+.lm::before{content:"";width:28px;height:3px;border-radius:2px;background:var(--gold);margin-bottom:6px}
+.lm b{font:600 17px/1.3 Fraunces,serif;color:var(--ink)}.lm p{color:var(--mute);font-size:15.5px;line-height:1.6;margin:0}
+.checks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.checks li{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:8px;align-content:start}
+.checks .n{width:30px;height:30px;border-radius:50%;background:var(--green-s);color:var(--green-d);font:700 15px/30px Inter,system-ui,sans-serif;text-align:center}
+.checks b{font:600 17px/1.3 Fraunces,serif;color:var(--ink)}.checks p{color:var(--mute);font-size:15.5px;line-height:1.6;margin:0}
+.checks code{display:block;font:500 13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;overflow-wrap:anywhere;color:var(--ink)}
+.checks p code{display:inline;padding:1px 6px;font-size:.88em;border-radius:6px}
+@media(max-width:900px){.lims,.checks{grid-template-columns:1fr}.spec summary{grid-template-columns:minmax(0,1fr) auto;padding:16px 18px}.spec summary .tag{grid-column:1/-1}.spec summary .limdot{grid-column:1;justify-self:start}.spec .body{padding:2px 18px 20px}}
+
 
 .mask{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:34px;align-items:center}
 .mask .paper img{display:block;width:100%;height:auto;border-radius:12px}
@@ -460,59 +492,24 @@ footer .links a{margin-right:16px}
   <section class="blk" style="padding-top:0">
     <div class="wrap">
       <div class="head"><span class="eyebrow">Pour celles et ceux qui vérifient</span><h2>Ce que le code fait réellement.</h2><p>Chaque ligne ci-dessous a été relevée dans le code de Providentia en novembre 2026, avec sa limite. Rien n’est une promesse de plus que ce qui est écrit.</p></div>
-      <dl class="spec">
-        <div class="row">
-          <dt><span class="tag">Ordinateur</span><h3>La base du foyer</h3></dt>
-          <dd>
-            <p>Le fichier <code>opibus.db</code> est chiffré avec SQLCipher. Sa clé, de 256 bits, est tirée au hasard au premier lancement et rangée dans <code>opibus.storage-key</code>, elle-même protégée par l’API Windows DPAPI. SQLCipher la reçoit sous forme de clé brute : il n’y a aucun mot de passe à deviner. Une base d’une ancienne version, encore lisible en clair, est convertie au premier lancement ; le fichier converti est relu avant de remplacer l’original.</p>
-            <p class="lim"><b>Limite.</b> DPAPI rattache la clé à votre compte Windows : selon la documentation de Microsoft, seul un utilisateur disposant des mêmes identifiants de connexion peut en général déchiffrer les données. Cela n’arrête pas un programme malveillant qui s’exécute sous votre propre session.</p>
-          </dd>
-        </div>
-        <div class="row">
-          <dt><span class="tag">Ordinateur</span><h3>Les justificatifs</h3></dt>
-          <dd>
-            <p>Chaque PDF ou photo est écrit dans un fichier protégé par DPAPI (en-tête <code>OPIBUS-DOC-1</code>) ; un ancien fichier en clair est converti dès qu’il est rencontré. Les types de fichiers actifs (HTML, SVG, XML, JavaScript) ne s’affichent jamais dans l’application : ils sont proposés en téléchargement, avec une politique de sécurité qui interdit tout contenu actif.</p>
-          </dd>
-        </div>
-        <div class="row">
-          <dt><span class="tag">Réseau</span><h3>Le serveur local</h3></dt>
-          <dd>
-            <p>Par défaut, Providentia n’écoute que l’adresse <code>127.0.0.1</code> : seul cet ordinateur peut lui parler. Elle ne s’ouvre au Wi-Fi de la maison (<code>0.0.0.0</code>) que si vous activez « Autoriser l’accès depuis le Wi-Fi de la maison » ; le réglage s’applique sans redémarrage. La création du compte, l’association des téléphones et les réglages réseau sont refusés à toute requête qui ne vient pas de l’ordinateur lui-même. Un appareil du réseau qui échoue cinq fois est mis en attente une minute, durée doublée à chaque série d’échecs, jusqu’à dix minutes.</p>
-          </dd>
-        </div>
-        <div class="row">
-          <dt><span class="tag">Compte</span><h3>La session</h3></dt>
-          <dd>
-            <p>Le mot de passe du compte local est haché avec sel (fonction <code>generate_password_hash</code> de Werkzeug) et jamais conservé en clair. Le cookie de session est <code>HttpOnly</code>, <code>SameSite=Lax</code>, valable 30 jours. La clé qui signe ce cookie n’est plus écrite en clair dans un fichier : elle est dérivée (HMAC-SHA-256) de la clé de la base, elle-même protégée par DPAPI. Toute écriture exige un jeton CSRF, comparé en temps constant. Les pages HTML de l’application portent une politique de sécurité de contenu (<code>Content-Security-Policy</code>) qui n’autorise que l’application elle-même et <code>geo.api.gouv.fr</code> pour les chargements, et interdit l’intégration dans le cadre d’un autre site ; les scripts de l’interface restant intégrés aux pages, elle limite surtout les chargements externes. Les réponses portent <code>X-Content-Type-Options: nosniff</code>, <code>X-Frame-Options: DENY</code>, <code>Referrer-Policy: no-referrer</code>, <code>Cross-Origin-Opener-Policy: same-origin</code> ; l’API n’est jamais mise en cache. Le micro n’est autorisé que pour la dictée ; la caméra et la localisation sont refusées.</p>
-          </dd>
-        </div>
-        <div class="row">
-          <dt><span class="tag">Téléphone</span><h3>L’association par QR code</h3></dt>
-          <dd>
-            <p>Le QR code contient l’adresse de l’ordinateur, un jeton aléatoire de 144 bits, à usage unique et valable dix minutes, et une clé de 256 bits propre à ce téléphone. <b>Cette clé se lit sur l’écran : elle ne circule jamais sur le réseau.</b> En échange du jeton, le téléphone reçoit un secret d’appareil de 256 bits ; l’ordinateur n’en conserve que l’empreinte SHA-256, et la compare en temps constant. La copie des données, les justificatifs et les documents envoyés par le téléphone sont chiffrés en AES-256-GCM, avec un nonce aléatoire de 96 bits et une étiquette propre à chaque usage. Le registre des téléphones (<code>mobile.json</code>) est lui aussi protégé par DPAPI. Un téléphone administrateur et deux téléphones de membres au plus ; la copie d’un membre est filtrée à son nom et ne contient pas le module Dépenses.</p>
-            <p class="lim"><b>Limite.</b> Sur le Wi-Fi, les échanges passent en HTTP simple, sans TLS. Les contenus sont chiffrés, mais l’adresse des requêtes et le secret d’appareil circulent en clair : avec ce secret, un tiers du réseau pourrait télécharger la copie chiffrée, sans pouvoir la lire faute de la clé du QR code. Activez l’accès Wi-Fi sur un réseau de confiance, et coupez-le quand vous n’en avez plus besoin.</p>
-          </dd>
-        </div>
-        <div class="row">
-          <dt><span class="tag">Téléphone</span><h3>Sur le téléphone</h3></dt>
-          <dd>
-            <p>Une clé de données aléatoire de 256 bits chiffre la copie. Elle n’est jamais écrite en clair : elle est protégée par votre code à six chiffres (PBKDF2-HMAC-SHA256, 210 000 itérations, puis AES-GCM), puis enveloppée une seconde fois par une clé de l’Android Keystore ; l’empreinte digitale est facultative. Dès le cinquième code erroné, une attente de 30 secondes s’impose, doublée à chaque échec jusqu’à 15 minutes. La sauvegarde Android est désactivée pour l’application, et la fenêtre web de l’application n’ouvre ni fichiers locaux ni contenus d’autres applications.</p>
-            <p class="lim"><b>Limite.</b> Six chiffres, c’est un secret court. Ce qui interdit de les essayer en dehors du téléphone, c’est la seconde enveloppe du Keystore, dont les clés ne sont pas exportables ; selon la documentation d’Android, la protection par circuit matériel dépend du modèle de téléphone.</p>
-          </dd>
-        </div>
-        <div class="row">
-          <dt><span class="tag">Internet</span><h3>Les connexions sortantes</h3></dt>
-          <dd>
-            <p>Trois situations, toutes déclenchées par votre saisie ou votre clic :</p>
+      <div class="spec">
+<details class="row" open><summary><span class="tag">Ordinateur</span><span class="st"><h3>La base du foyer</h3><span class="gist">Une base chiffrée, dont la clé est protégée par votre session Windows.</span></span><span class="limdot">avec limite</span><span class="chev" aria-hidden="true"></span></summary><div class="body"><p>Le fichier <code>opibus.db</code> est chiffré avec SQLCipher. Sa clé, de 256 bits, est tirée au hasard au premier lancement et rangée dans <code>opibus.storage-key</code>, elle-même protégée par l’API Windows DPAPI. SQLCipher la reçoit sous forme de clé brute : il n’y a aucun mot de passe à deviner. Une base d’une ancienne version, encore lisible en clair, est convertie au premier lancement ; le fichier converti est relu avant de remplacer l’original.</p>
+            <p class="lim"><b>Limite.</b> DPAPI rattache la clé à votre compte Windows : selon la documentation de Microsoft, seul un utilisateur disposant des mêmes identifiants de connexion peut en général déchiffrer les données. Cela n’arrête pas un programme malveillant qui s’exécute sous votre propre session.</p></div></details>
+<details class="row"><summary><span class="tag">Ordinateur</span><span class="st"><h3>Les justificatifs</h3><span class="gist">Chaque PDF ou photo est rangé dans un fichier protégé par DPAPI.</span></span><span class="chev" aria-hidden="true"></span></summary><div class="body"><p>Chaque PDF ou photo est écrit dans un fichier protégé par DPAPI (en-tête <code>OPIBUS-DOC-1</code>) ; un ancien fichier en clair est converti dès qu’il est rencontré. Les types de fichiers actifs (HTML, SVG, XML, JavaScript) ne s’affichent jamais dans l’application : ils sont proposés en téléchargement, avec une politique de sécurité qui interdit tout contenu actif.</p></div></details>
+<details class="row"><summary><span class="tag">Réseau</span><span class="st"><h3>Le serveur local</h3><span class="gist">Par défaut, seul cet ordinateur peut parler à Providentia.</span></span><span class="chev" aria-hidden="true"></span></summary><div class="body"><p>Par défaut, Providentia n’écoute que l’adresse <code>127.0.0.1</code> : seul cet ordinateur peut lui parler. Elle ne s’ouvre au Wi-Fi de la maison (<code>0.0.0.0</code>) que si vous activez « Autoriser l’accès depuis le Wi-Fi de la maison » ; le réglage s’applique sans redémarrage. La création du compte, l’association des téléphones et les réglages réseau sont refusés à toute requête qui ne vient pas de l’ordinateur lui-même. Un appareil du réseau qui échoue cinq fois est mis en attente une minute, durée doublée à chaque série d’échecs, jusqu’à dix minutes.</p></div></details>
+<details class="row"><summary><span class="tag">Compte</span><span class="st"><h3>La session</h3><span class="gist">Mot de passe haché, cookie de session protégé, jeton CSRF à chaque écriture.</span></span><span class="chev" aria-hidden="true"></span></summary><div class="body"><p>Le mot de passe du compte local est haché avec sel (fonction <code>generate_password_hash</code> de Werkzeug) et jamais conservé en clair. Le cookie de session est <code>HttpOnly</code>, <code>SameSite=Lax</code>, valable 30 jours. La clé qui signe ce cookie n’est plus écrite en clair dans un fichier : elle est dérivée (HMAC-SHA-256) de la clé de la base, elle-même protégée par DPAPI. Toute écriture exige un jeton CSRF, comparé en temps constant. Les pages HTML de l’application portent une politique de sécurité de contenu (<code>Content-Security-Policy</code>) qui n’autorise que l’application elle-même et <code>geo.api.gouv.fr</code> pour les chargements, et interdit l’intégration dans le cadre d’un autre site ; les scripts de l’interface restant intégrés aux pages, elle limite surtout les chargements externes. Les réponses portent <code>X-Content-Type-Options: nosniff</code>, <code>X-Frame-Options: DENY</code>, <code>Referrer-Policy: no-referrer</code>, <code>Cross-Origin-Opener-Policy: same-origin</code> ; l’API n’est jamais mise en cache. Le micro n’est autorisé que pour la dictée ; la caméra et la localisation sont refusées.</p></div></details>
+<details class="row"><summary><span class="tag">Téléphone</span><span class="st"><h3>L’association par QR code</h3><span class="gist">La clé du téléphone se lit sur l’écran : elle ne circule jamais sur le réseau.</span></span><span class="limdot">avec limite</span><span class="chev" aria-hidden="true"></span></summary><div class="body"><p>Le QR code contient l’adresse de l’ordinateur, un jeton aléatoire de 144 bits, à usage unique et valable dix minutes, et une clé de 256 bits propre à ce téléphone. <b>Cette clé se lit sur l’écran : elle ne circule jamais sur le réseau.</b> En échange du jeton, le téléphone reçoit un secret d’appareil de 256 bits ; l’ordinateur n’en conserve que l’empreinte SHA-256, et la compare en temps constant. La copie des données, les justificatifs et les documents envoyés par le téléphone sont chiffrés en AES-256-GCM, avec un nonce aléatoire de 96 bits et une étiquette propre à chaque usage. Le registre des téléphones (<code>mobile.json</code>) est lui aussi protégé par DPAPI. Un téléphone administrateur et deux téléphones de membres au plus ; la copie d’un membre est filtrée à son nom et ne contient pas le module Dépenses.</p>
+            <p class="lim"><b>Limite.</b> Sur le Wi-Fi, les échanges passent en HTTP simple, sans TLS. Les contenus sont chiffrés, mais l’adresse des requêtes et le secret d’appareil circulent en clair : avec ce secret, un tiers du réseau pourrait télécharger la copie chiffrée, sans pouvoir la lire faute de la clé du QR code. Activez l’accès Wi-Fi sur un réseau de confiance, et coupez-le quand vous n’en avez plus besoin.</p></div></details>
+<details class="row"><summary><span class="tag">Téléphone</span><span class="st"><h3>Sur le téléphone</h3><span class="gist">La copie est chiffrée ; votre code à six chiffres protège la clé.</span></span><span class="limdot">avec limite</span><span class="chev" aria-hidden="true"></span></summary><div class="body"><p>Une clé de données aléatoire de 256 bits chiffre la copie. Elle n’est jamais écrite en clair : elle est protégée par votre code à six chiffres (PBKDF2-HMAC-SHA256, 210 000 itérations, puis AES-GCM), puis enveloppée une seconde fois par une clé de l’Android Keystore ; l’empreinte digitale est facultative. Dès le cinquième code erroné, une attente de 30 secondes s’impose, doublée à chaque échec jusqu’à 15 minutes. La sauvegarde Android est désactivée pour l’application, et la fenêtre web de l’application n’ouvre ni fichiers locaux ni contenus d’autres applications.</p>
+            <p class="lim"><b>Limite.</b> Six chiffres, c’est un secret court. Ce qui interdit de les essayer en dehors du téléphone, c’est la seconde enveloppe du Keystore, dont les clés ne sont pas exportables ; selon la documentation d’Android, la protection par circuit matériel dépend du modèle de téléphone.</p></div></details>
+<details class="row"><summary><span class="tag">Internet</span><span class="st"><h3>Les connexions sortantes</h3><span class="gist">Trois situations, toutes déclenchées par votre saisie ou votre clic.</span></span><span class="chev" aria-hidden="true"></span></summary><div class="body"><p>Trois situations, toutes déclenchées par votre saisie ou votre clic :</p>
             <ul>
               <li>vous saisissez un code postal à cinq chiffres dans une fiche : la commune est cherchée sur l’API publique <code>geo.api.gouv.fr</code>, qui reçoit ce code postal (et, comme tout site, l’adresse IP de votre connexion) ;</li>
               <li>vous activez la dictée vocale : le modèle de reconnaissance (environ 41 Mo) est téléchargé une fois depuis <code>alphacephei.com</code> ; la transcription se fait ensuite sur l’ordinateur ;</li>
               <li>vous cliquez sur un lien vers un site officiel (service-public.fr, Légifrance…) : il s’ouvre dans votre navigateur.</li>
             </ul>
-            <p>Les pages de l’application, guide intégré compris, n’appellent aucune police ni aucun script hébergé ailleurs. Pas de statistiques d’usage, pas de rapport d’erreurs envoyé à l’éditeur, pas de compte en ligne.</p>
-          </dd>
-        </div>
-      </dl>
+            <p>Les pages de l’application, guide intégré compris, n’appellent aucune police ni aucun script hébergé ailleurs. Pas de statistiques d’usage, pas de rapport d’erreurs envoyé à l’éditeur, pas de compte en ligne.</p></div></details>
+</div>
     </div>
   </section>
   <section class="blk" style="padding-top:0">
@@ -531,27 +528,23 @@ footer .links a{margin-right:16px}
   </section>
   <section class="blk" style="padding-top:0">
     <div class="wrap">
-      <div class="duo2">
-        <div>
-          <span class="eyebrow">Limites</span>
-          <h3>Ce que Providentia ne prétend pas faire.</h3>
-          <ul class="plain">
-            <li><b>Protéger d’un programme malveillant déjà présent</b> sous votre session Windows : DPAPI protège des autres comptes et du disque emporté seul, pas d’un logiciel qui tourne sous votre identité.</li>
-            <li><b>Chiffrer le Wi-Fi à votre place</b> : l’accès depuis le téléphone utilise HTTP ; seuls les contenus sont chiffrés.</li>
-            <li><b>Reconnaître tous les noms</b> dans le masquage : il s’appuie sur les noms saisis dans Providentia et sur des règles (titres de civilité, formats d’IBAN, de téléphone, de courriel…). Un nom écrit sans titre et inconnu du logiciel peut passer ; l’aperçu est là pour votre relecture.</li>
-            <li><b>Remplacer un code solide</b> sur le téléphone : un code à six chiffres reste court.</li>
-          </ul>
-        </div>
-        <div>
-          <span class="eyebrow">Vérifier soi-même</span>
-          <h3>Trois contrôles à la portée de tous.</h3>
-          <ol class="plain">
-            <li><b>La base est illisible.</b> Ouvrez <code>%LOCALAPPDATA%\Providentia\data\opibus.db</code> dans un éditeur hexadécimal : le fichier ne commence pas par « SQLite format 3 », l’en-tête d’une base non chiffrée.</li>
-            <li><b>Le serveur ne sort pas de l’ordinateur.</b> Wi-Fi désactivé dans Providentia, lancez <code>netstat -ano | findstr LISTENING</code> : le port de Providentia est lié à <code>127.0.0.1</code>, non à <code>0.0.0.0</code>.</li>
-            <li><b>Le programme est celui publié.</b> Comparez l’empreinte SHA-256 du fichier d’installation à celle de la page Télécharger.</li>
-          </ol>
-        </div>
+      <div class="lims-head"><span class="eyebrow">Limites</span><h3>Ce que Providentia ne prétend pas faire.</h3></div>
+      <div class="lims">
+        <div class="lm"><b>Protéger d’un programme malveillant déjà présent</b><p>Sous votre session Windows, DPAPI protège des autres comptes et du disque emporté seul, pas d’un logiciel qui tourne sous votre identité.</p></div>
+        <div class="lm"><b>Chiffrer le Wi-Fi à votre place</b><p>L’accès depuis le téléphone utilise HTTP ; seuls les contenus sont chiffrés.</p></div>
+        <div class="lm"><b>Reconnaître tous les noms dans le masquage</b><p>Il s’appuie sur les noms saisis dans Providentia et sur des règles (titres de civilité, formats d’IBAN, de téléphone, de courriel…). Un nom écrit sans titre et inconnu du logiciel peut passer : l’aperçu est là pour votre relecture.</p></div>
+        <div class="lm"><b>Remplacer un code solide sur le téléphone</b><p>Un code à six chiffres reste court.</p></div>
       </div>
+    </div>
+  </section>
+  <section class="blk" style="padding-top:0">
+    <div class="wrap">
+      <div class="lims-head"><span class="eyebrow">Vérifier soi-même</span><h3>Trois contrôles à la portée de tous.</h3></div>
+      <ol class="checks">
+        <li><span class="n" aria-hidden="true">1</span><b>La base est illisible.</b><p>Ouvrez ce fichier dans un éditeur hexadécimal :</p><code>%LOCALAPPDATA%\<wbr>Providentia\<wbr>data\<wbr>opibus.db</code><p>Il ne commence pas par « SQLite format 3 », l’en-tête d’une base non chiffrée.</p></li>
+        <li><span class="n" aria-hidden="true">2</span><b>Le serveur ne sort pas de l’ordinateur.</b><p>Wi-Fi désactivé dans Providentia, lancez :</p><code>netstat -ano | findstr LISTENING</code><p>Le port de Providentia est lié à <code>127.0.0.1</code>, non à <code>0.0.0.0</code>.</p></li>
+        <li><span class="n" aria-hidden="true">3</span><b>Le programme est celui publié.</b><p>Comparez l’empreinte SHA-256 du fichier d’installation à celle de la page Télécharger.</p></li>
+      </ol>
     </div>
   </section>
   <section class="blk" style="padding-top:0">
